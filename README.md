@@ -5,6 +5,7 @@ Requirements:
   - Selenium
   - python 3+
   - Chrome WebDriver
+  - Pandas
 
 ### Installation
 1. Download the .py file
