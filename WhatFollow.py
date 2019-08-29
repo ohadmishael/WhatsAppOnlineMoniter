@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from time import gmtime, strftime, sleep
+import pandas as pd
 
 #Enter TARGET (person you would like to moniter) and TIMETORUN(time to run the project in seconds)
 TARGET = 'italynum'
