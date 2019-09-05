@@ -7,8 +7,9 @@ from time import gmtime, strftime, sleep
 import pandas as pd
 
 #Enter TARGET (person you would like to moniter) and TIMETORUN(time to run the project in seconds)
-TARGET = 'italynum'
-TIMETORUN = 100
+TARGET = input('Enter Targets name: ')
+TIMETORUN = 1000
+#print ('the time to run is: ' + str(int(TIMETORUN/3600)) + ' hours')
 
 ###########################################################################################################################
 ###########################################################################################################################
@@ -34,21 +35,22 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--window-size=1920x1080')
 browser = webdriver.Chrome()
 browser.get('https://web.whatsapp.com')
-while 1 is 1:
+PASSED = False
+while PASSED is False:
     print ()
     print('\nYou got 15 seconds to visit the website and scan the QR code.')
     print('Waiting QR Scanning...')
     sleep(15)
     try:
         if (check_exists_by_xpath('//*[@title="Search or start new chat"]') is True):
-            SCANNED = True
+            PASSED = True
             #print('Success!')
     except NoSuchElementException:
         pass
         
 search = browser.find_element_by_class_name('eiCXe')
 search.send_keys(TARGET)
-sleep(2)
+sleep(0.5)
 x = "//*[contains(text(), '"
 y = "')]"
 TARGET = str(TARGET)
@@ -63,6 +65,8 @@ print ()
 print ()
 print ()
 print ('Showing Activity in whatsapp of: ' + TARGET)
+if (check_exists_by_xpath('//*[@title="online"]') is True or (check_exists_by_xpath('//*[@title="typing..."]') is True)):
+	print ('Was Already online when started')
 for i in range(TIMETORUN):
     if (check_exists_by_xpath('//*[@title="online"]') is True or (check_exists_by_xpath('//*[@title="typing..."]') is True)):
         #print ('online')
@@ -78,3 +82,4 @@ for i in range(TIMETORUN):
             print ('Logged Out: ' + str(datetime.now().strftime('%H:%M:%S')))
             time = 0
     sleep(1)
+print ('out')
